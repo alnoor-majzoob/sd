@@ -1,0 +1,11 @@
+export 'src/models/models.dart';
+export 'src/parser/excel_parser.dart';
+export 'src/validation/validation_issue.dart';
+export 'src/validation/workbook_validator.dart';
+export 'src/scheduling/calendar_manager.dart';
+export 'src/genetic/schedule_chromosome.dart';
+export 'src/genetic/conflict_detector.dart';
+export 'src/genetic/schedule_factory.dart';
+export 'src/genetic/schedule_mutation.dart';
+export 'src/genetic/schedule_fitness_evaluator.dart';
+export 'src/genetic/ga_runner.dart';
