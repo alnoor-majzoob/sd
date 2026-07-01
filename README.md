@@ -45,3 +45,4 @@ dart run bin/training_scheduler_cli.dart ../training_input_updated.xlsx
 ## Notes
 This environment did not have Dart SDK installed, so the project was generated but not executed here.
 # pl
+# sd
