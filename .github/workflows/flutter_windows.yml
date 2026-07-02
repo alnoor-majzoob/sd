@@ -1,0 +1,53 @@
+name: Flutter Windows Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build_windows:
+    name: Build Windows Desktop App
+    runs-on: windows-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up the Flutter SDK environment
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          # Optional: specify a fixed version if needed, e.g., flutter-version: '3.22.x'
+
+      # Step 3: Explicitly enable Windows desktop support
+      - name: Enable Windows Desktop Build
+        run: flutter config --enable-windows-desktop
+
+      # Step 4: Fetch project dependencies
+      - name: Install Dependencies
+        run: flutter pub get
+
+      # Step 5: (Optional) Run code generation if using packages like drift, freezed, etc.
+      # - name: Run Build Runner
+      #   run: dart run build_runner build --delete-conflicting-outputs
+
+      # Step 6: Compile the release executable
+      - name: Build Release Windows executable
+        run: flutter build windows --release
+
+      # Step 7: Bundle the build output into a ZIP archive for easier distribution
+      - name: Package Windows Release
+        shell: pwsh
+        run: |
+          Compress-Archive -Path build\windows\x64\runner\Release\* -DestinationPath build\windows\Flutter-Windows-Release.zip
+
+      # Step 8: Upload the packaged ZIP artifact to GitHub
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-release-zip
+          path: build\windows\Flutter-Windows-Release.zip
