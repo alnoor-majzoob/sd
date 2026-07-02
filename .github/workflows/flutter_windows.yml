@@ -32,8 +32,8 @@ jobs:
         run: flutter pub get
 
       # Step 5: (Optional) Run code generation if using packages like drift, freezed, etc.
-      # - name: Run Build Runner
-      #   run: dart run build_runner build --delete-conflicting-outputs
+      - name: Run Build Runner
+        run: dart run build_runner build --delete-conflicting-outputs
 
       # Step 6: Compile the release executable
       - name: Build Release Windows executable
